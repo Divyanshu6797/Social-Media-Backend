@@ -40,7 +40,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ error: err });
     }
   } else {
-    res.status(400).json({ error: "Mail already exists" });
+    res.status(400).json({ error: "email already exists" });
   }
 };
 
@@ -59,9 +59,22 @@ const login = async (req, res) => {
   }
 };
 
+const getUserId = async (req, res) => {
+  try {
+    res.send(req.userid)
+    
+  } catch (error) {
+    console.error("Error finding current user:", error);
+    res.send(400).json({ error: error });
+    
+  }
+
+}
+
 
 
 module.exports = {
   signup,
-  login
+  login,
+  getUserId
 };

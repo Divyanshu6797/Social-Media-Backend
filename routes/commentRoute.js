@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {addCommentOnPost, fetchCommentOnPost } = require('../controllers/commentController');
+const {addCommentOnPost, fetchCommentOnPost, deleteComment, updateComment } = require('../controllers/commentController');
 const { commentMiddle } = require('../middleware/commentMiddleware');
 
 
@@ -13,6 +13,8 @@ router.use(
 
 router.post('/addcomment', addCommentOnPost);
 router.get('/fetchcomments', fetchCommentOnPost);
+router.delete('/deletecomment', deleteComment);
+router.put('/updatecomment', updateComment);
 
 
 

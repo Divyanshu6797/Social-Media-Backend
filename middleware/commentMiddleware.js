@@ -16,7 +16,9 @@ const commentMiddle = (req, res, next) => {
     console.log("userid.id : ",userid.id);
     console.log("userid :", userid)
     req.userid = userid.id;
+    
     next();
+    console.log("lets go next")
   });
 };
 
