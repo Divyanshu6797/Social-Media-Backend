@@ -52,7 +52,25 @@ const fetchAllPosts = async (req, res) => {
   }
 };
 
+const fetchUserPosts =  async (req, res) => {
+    const userId = req.userid
+    console.log(typeof userId, userId)
+    try {
+      const posts = await postModel
+        .find({user : userId}, "id caption imageUrl postedBy")
+        .sort({ updatedAt: -1 });
+  
+      // Respond with the posts
+      res.status(200).json(posts);
+    } catch (error) {
+      console.error("Error fetching posts", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 module.exports = {
   addPost,
   fetchAllPosts,
+  fetchUserPosts,
+ 
 };

@@ -10,7 +10,13 @@ const port = process.env.PORT || 3000
 
 var cors = require('cors')
  
-app.use(cors())
+const corsOptions = {
+  origin: ['http://localhost:5173','https://social-media-frontend-black.vercel.app'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use((req, res, next) => {
