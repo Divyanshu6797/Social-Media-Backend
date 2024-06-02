@@ -22,12 +22,19 @@ const userSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
+      bio : {
+        type : String,
+      },
+      phoneNo : {
+        type : String,
+      },
          isBlocked: {
         type: Boolean,
         default: false,
       },
       imageUrl : String,
-      bio : String,
+      
+
     
     },
   

@@ -71,10 +71,59 @@ const getUserId = async (req, res) => {
 
 }
 
+const editProfile = async(req,res) => {
+  console.log("controller")
+  const {name,username,emailID, bio, phoneNo,} = req.body;
+  try {
+
+    
+
+    const user = await userModel.findByIdAndUpdate(req.userid, {
+      name,
+      username,
+      emailID,
+      bio,
+      phoneNo,
+    },
+    {new: true}
+
+  );
+    console.log("User updated", user);
+    res.status(200).json({ user });
+  }
+  catch(err) {
+    res.status(400).json({ error: err, "message" : "error updaing uset details" });
+  }
+}
+
+const fetchCurrentUserInfo = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.userid);
+    
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Remove password field before sending response
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password;
+
+    console.log("user", userWithoutPassword);
+    res.status(200).json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("Error finding current user:", error);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+
 
 
 module.exports = {
   signup,
   login,
-  getUserId
+  getUserId,
+  editProfile,
+  fetchCurrentUserInfo
 };
