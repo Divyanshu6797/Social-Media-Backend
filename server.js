@@ -5,6 +5,7 @@ const mongoose=require('mongoose')
 const UserRoute = require('./routes/UserRoute');
 const postRoute = require('./routes/postRoute');
 const commentRoute = require('./routes/commentRoute');
+const followRoute = require('./routes/followRoute');
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/api/user', UserRoute);
 app.use('/api/user/post', postRoute);
 app.use('/api/user/comment',commentRoute);
+app.use('/api/user/follow',followRoute);
 
 
 mongoose
