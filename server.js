@@ -6,6 +6,7 @@ const UserRoute = require('./routes/UserRoute');
 const postRoute = require('./routes/postRoute');
 const commentRoute = require('./routes/commentRoute');
 const followRoute = require('./routes/followRoute');
+const likeRoute = require('./routes/likeRoute');
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -32,6 +33,7 @@ app.use('/api/user', UserRoute);
 app.use('/api/user/post', postRoute);
 app.use('/api/user/comment',commentRoute);
 app.use('/api/user/follow',followRoute);
+app.use('/api/user/like',likeRoute);
 
 
 mongoose
