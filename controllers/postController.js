@@ -15,8 +15,10 @@ const addPost = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found " });
     }
-
+    
     const { caption, imageUrl } = req.body;
+    console.log("caption", caption);
+    console.log("imageUrl", imageUrl);
 
     // Create a new post instance
     const newPost = new postModel({
