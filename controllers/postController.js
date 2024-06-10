@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const postModel = require("../models/postModel");
 const commentModel = require("../models/commentModel");
+const likeModel = require("../models/likeModel");
 const mongoose = require('mongoose');
 
 const addPost = async (req, res) => {
