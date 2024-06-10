@@ -68,7 +68,7 @@ const fetchUserPosts = async (req, res) => {
   }
 };
 
-const deletePostAndItsComments = async (req, res) => {{
+const deletePostAndItsComments = async (req, res) => {
   
   const { postId } = req.body;
 
@@ -76,7 +76,6 @@ const deletePostAndItsComments = async (req, res) => {{
     return res.status(400).json({ error: 'Post ID is required' });
   }
 
-  
   if (!mongoose.Types.ObjectId.isValid(postId)) {
     return res.status(400).json({ error: 'Invalid post ID' });
   }
@@ -94,20 +93,24 @@ const deletePostAndItsComments = async (req, res) => {{
     // Delete all comments associated with the post within the session
     await commentModel.deleteMany({ post: postId }).session(session);
 
+    // Delete likes associated with the post within the session
+    await likeModel.deleteMany({ post: postId }).session(session);
+
     // Commit the transaction
     await session.commitTransaction();
     session.endSession();
-    console.log('Post and associated comments deleted successfully.');
-    return res.status(200).json({ message: 'Post and associated comments deleted successfully' , deletedPost});
+    console.log('Post, associated comments, and likes deleted successfully.');
+    return res.status(200).json({ message: 'Post, associated comments, and likes deleted successfully', deletedPost });
 
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    console.error(`Error deleting post and associated comments: ${error}`);
+    console.error(`Error deleting post, comments, and likes: ${error}`);
     return res.status(500).json({ error: error.message });
   }
-}
+
 };
+
 
 const editPost = async (req, res) => {
   console.log("hi")
